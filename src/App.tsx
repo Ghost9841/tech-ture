@@ -7,6 +7,7 @@ const App = (props: Props) => {
   return (
     <>
       <main className="relative min-h-screen overflow-x-hidden">
+        <div className="">Test</div>
         <Hero />
       </main>
     </>
