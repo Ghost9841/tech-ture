@@ -1,13 +1,12 @@
-import React from 'react'
+
 import Hero from './components/Hero'
 
-type Props = {}
 
-const App = (props: Props) => {
+
+const App = () => {
   return (
     <>
       <main className="relative min-h-screen overflow-x-hidden">
-        <div className="">Test</div>
         <Hero />
       </main>
     </>
