@@ -6,8 +6,8 @@
 }
 
 @font-face {
-  font-family: 'general';
-  src: url('/fonts/general.woff2') format('woff2');
+    font-family: 'general';
+    src : url('/fonts/general.woff2') format('woff2');
 }
 
 @font-face {
@@ -31,4 +31,21 @@
   --font-robert-regular: 'robert-regular';
   --font-robert-medium: 'robert-medium';
   --font-robert-bold: 'robert-bold';
+}
+
+@theme {
+    /* FOR BLUE */
+
+    --color-blue-50: #DFDFF0;
+    --color-blue-75: #DFDFF2;
+    --color-blue-100: #F0F2FA;
+    --color-blue-200: #010101;
+    --color-blue-300: #4FB7DD;
+
+    /* For Violet */
+    --color-violet-300: #5724FF;
+    
+    /* For Yellow */
+    --color-yellow-100: #8E983F;
+    --color-yellow-300: #EDFF66;
 }
