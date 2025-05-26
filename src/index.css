@@ -34,7 +34,7 @@ body {
 
 @font-face {
   font-family: 'Zentry';
-  src: url('/fonts/zentry.woff2') format('woff2');
+  src: url('/fonts/zentry-regular.woff2') format('woff2');
 }
 
 @theme {
