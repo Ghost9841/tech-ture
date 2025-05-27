@@ -1,5 +1,5 @@
 
-import Hero from './components/Hero'
+import Hero from './components/Hero/page/Hero'
 
 
 
