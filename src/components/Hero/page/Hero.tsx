@@ -11,8 +11,8 @@ const Hero = () => {
 
     const [currentIndex, setCurrentIndex] = useState<number>(1);
     const [hasClicked, setHasClicked] = useState<boolean>(false);
-    // const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [, setLoadedVideos] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [loadedVideos, setLoadedVideos] = useState<number>(0);
 
     const totalVideos = 3;
     const nextVideoRef = useRef<HTMLVideoElement>(null);
