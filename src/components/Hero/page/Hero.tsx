@@ -130,7 +130,7 @@ const Hero = () => {
         })
     }, [])
 
-    const getVideoSource = (index: number) => `video/hero-${index}.mp4`;
+    const getVideoSource = (index: number) => `videos/hero-${index}.mp4`;
 
     useEffect(() => {
         if (loadedVideos === totalVideos) {
