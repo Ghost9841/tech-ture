@@ -8,7 +8,8 @@ const App = () => {
     <>
       <main className="relative min-h-screen overflow-x-hidden">
         <Hero />
-      </main>
+
+        <section className="z-0 min-h-screen bg-blue-500"></section>      </main>
     </>
   )
 }
