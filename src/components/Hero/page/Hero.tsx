@@ -4,6 +4,9 @@ import { TiLocationArrow } from "react-icons/ti";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from 'gsap/all'
+import LoadingScreen from "../../ui/loading";
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
@@ -13,7 +16,7 @@ const Hero = () => {
     const [loadedVideos, setLoadedVideos] = useState<number>(0);
 
     const totalVideos = 4;
-    
+
     // Separate refs for different videos
     const nextVideoRef = useRef<HTMLVideoElement>(null);
     const currentVideoRef = useRef<HTMLVideoElement>(null);
@@ -25,17 +28,17 @@ const Hero = () => {
     }
 
     const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
-    
+
     const handleMiniVDClick = () => {
         if (hasClicked) return; // Prevent multiple clicks during animation
-        
+
         // Preload the buffer video with the new content
         if (bufferVideoRef.current) {
             bufferVideoRef.current.src = getVideoSource(upcomingVideoIndex);
             bufferVideoRef.current.currentTime = 0;
             bufferVideoRef.current.play();
         }
-        
+
         setHasClicked(true);
         setCurrentIndex(upcomingVideoIndex);
     }
@@ -69,35 +72,35 @@ const Hero = () => {
                 onComplete: () => {
                     // Swap the videos - buffer becomes main background
                     gsap.set("#background-video", { visibility: 'invisible' });
-                    gsap.set("#buffer-video", { 
-                        visibility: 'visible', 
+                    gsap.set("#buffer-video", {
+                        visibility: 'visible',
                         opacity: 1,
-                        zIndex: 1 
+                        zIndex: 1
                     });
-                    
+
                     // Update the background video source for next transition
                     if (backgroundVideoRef.current) {
                         backgroundVideoRef.current.src = getVideoSource(currentIndex);
                         backgroundVideoRef.current.currentTime = 0;
                         backgroundVideoRef.current.play();
                     }
-                    
+
                     // Reset everything
                     setTimeout(() => {
                         gsap.set("#background-video", { visibility: 'visible' });
                         gsap.set("#buffer-video", { visibility: 'invisible', opacity: 0, zIndex: 5 });
-                        
+
                         setHasClicked(false);
-                        gsap.set("#next-video", { 
-                            visibility: 'invisible', 
-                            scale: 0, 
-                            width: '256px', 
-                            height: '256px' 
+                        gsap.set("#next-video", {
+                            visibility: 'invisible',
+                            scale: 0,
+                            width: '256px',
+                            height: '256px'
                         });
                     }, 100);
                 }
             })
-            
+
             gsap.from('#current-video', {
                 transformOrigin: 'center center',
                 scale: 0.5,
@@ -105,7 +108,7 @@ const Hero = () => {
                 ease: 'power1.inOut',
             })
         }
-    }, {dependencies: [currentIndex, hasClicked], revertOnUpdate: true})
+    }, { dependencies: [currentIndex, hasClicked], revertOnUpdate: true })
 
     // Clip path animation
     useGSAP(() => {
@@ -113,7 +116,7 @@ const Hero = () => {
             clipPath: 'polygon(14% 0, 72% 0%, 90% 90%, 0 100%)',
             borderRadius: '0 0 40% 10%'
         })
-        
+
         gsap.from('#video-frame', {
             clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)',
             borderRadius: '0 0 0 0',
@@ -127,7 +130,7 @@ const Hero = () => {
         })
     }, [])
 
-    const getVideoSource = (index: number) => `videos/hero-${index}.mp4`;
+    const getVideoSource = (index: number) => `video/hero-${index}.mp4`;
 
     useEffect(() => {
         if (loadedVideos === totalVideos) {
@@ -138,20 +141,14 @@ const Hero = () => {
     return (
         <div className="relative h-dvh w-screen overflow-x-hidden">
             {isLoading && (
-                <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-                    <div className="three-body">
-                        <div className="three-body__dot"></div>
-                        <div className="three-body__dot"></div>
-                        <div className="three-body__dot"></div>
-                    </div>
-                </div>
+                <LoadingScreen/>
             )}
-            
+
             <section id="video-frame" className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75">
                 {/* Mini video preview */}
                 <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
                     <div
-                        onClick={handleMiniVDClick} 
+                        onClick={handleMiniVDClick}
                         className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in-out hover:scale-100 hover:opacity-100"
                     >
                         <video
@@ -177,7 +174,7 @@ const Hero = () => {
                     preload="auto"
                     id="next-video"
                     className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-                    onLoadedData={handleVideoLoad} 
+                    onLoadedData={handleVideoLoad}
                 />
 
                 {/* Main background video */}
@@ -218,16 +215,16 @@ const Hero = () => {
                             Unlead the Play Economy
                         </p>
 
-                        <Button 
-                            id="watch-trailer" 
-                            title="Watch Trailer" 
+                        <Button
+                            id="watch-trailer"
+                            title="Watch Trailer"
                             icon={<TiLocationArrow />}
                             containerClass="bg-yellow-300 flex-center gap-1"
                         />
                     </div>
                 </div>
             </section>
-            
+
             <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
                 G<b>a</b>ming
             </h1>
